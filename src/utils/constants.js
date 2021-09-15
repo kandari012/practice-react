@@ -7,3 +7,18 @@ export const API_URLS = {
 };
 
 export const LOCALSTORAGE_TOKEN_KEY = "token_key";
+
+
+
+export function getFormBody(params) {
+    let formBody = [];
+  
+    for (let key in params) {
+      let encodedKey = encodeURIComponent(key); //user name  ==user%20name
+      let encodedValue = encodeURIComponent(params[key]); //aakash 123  ==akash%20123
+  
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    return formBody.join("&"); //"username=akash&password=1234"
+  }
+  

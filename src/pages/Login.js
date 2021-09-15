@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
+import { login } from "../api/index";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -7,7 +8,7 @@ function Login() {
   const [loggingIn, setLoggingIn] = useState(false);
   const { addToast } = useToasts();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
     if (!email || !password) {
@@ -15,6 +16,19 @@ function Login() {
         appearance: "error",
       });
     }
+
+    const response = await login(email, password);
+    console.log("response", response);
+    if (response.success) {
+      addToast("logged in successfully", {
+        appearance: "success",
+      });
+    } else {
+      addToast(response.message, {
+        appearance: "error",
+      });
+    }
+    setLoggingIn(false);
   };
 
   return (
