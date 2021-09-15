@@ -1,9 +1,5 @@
-const API_ROOT = "http://localhost:5000/user/";
+export * from "./constants"; //will import all named exports from the file nad create a object to export it
 
-export const API_URLS = {
-  login: () => `${API_ROOT}createSession`,
-  signIn: () => `${API_ROOT}create`,
-  getAllUsers: () => `${API_ROOT}getAllUser`,
-};
+// import {URL, API} from "./constants";
 
-export const LOCALSTORAGE_TOKEN_KEY = "token_key";
+// export { App ,URL};
