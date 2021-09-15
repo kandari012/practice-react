@@ -5,3 +5,5 @@ export const API_URLS = {
   signIn: () => `${API_ROOT}create`,
   getAllUsers: () => `${API_ROOT}getAllUser`,
 };
+
+export const LOCALSTORAGE_TOKEN_KEY = "token_key";
