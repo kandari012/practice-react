@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getusers } from "./../api/index";
 import { Home } from "./../pages";
+import { Navbar } from "./index";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <Home users={users} />
     </div>
   );
