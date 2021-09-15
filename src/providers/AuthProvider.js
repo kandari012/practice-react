@@ -1,9 +1,12 @@
 import { createContext } from "react";
+
 import { useProviderAuth } from "../hooks";
 
 const initialState = {
   user: null,
+
   login: () => {},
+
   logout: () => {},
   loadung: true,
 };
