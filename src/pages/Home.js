@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 function Home({ users }) {
@@ -19,4 +20,7 @@ function Home({ users }) {
   );
 }
 
+Home.propTypes = {
+  users: PropTypes.array.isRequired,
+};
 export default Home;
