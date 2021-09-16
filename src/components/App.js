@@ -6,6 +6,7 @@ import { useAuth } from "./../hooks/index";
 function App() {
   // use effect in useProviderAuth will be callede and set the user from token
   const auth = useAuth();
+  console.log(auth);
 
   return (
     <div className="App">
