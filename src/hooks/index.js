@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./../providers/AuthProvider";
 import { login as UserLogin } from "../api";
+import jwt from "jwt-decode";
 import {
   LOCALSTORAGE_TOKEN_KEY,
   removeItemFromLocalStorage,
   setItemInLocalStorage,
+  getItemFromLocalStorage,
 } from "../utils";
 
 //no need to call use context again in all fxn
@@ -19,6 +21,16 @@ export const useAuth = () => {
 export const useProviderAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // on app first load or reload will check token in store and update user with that
+  useEffect(() => {
+    const UserToken = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+
+    if (UserToken) {
+      const user = jwt(UserToken);
+      setUser(user);
+    }
+  }, []);
 
   const login = async (email, password) => {
     const response = await UserLogin(email, password);

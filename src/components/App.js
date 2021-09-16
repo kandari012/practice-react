@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
-import { getusers } from "./../api/index";
 import { Home, Login, Register, Page404 } from "./../pages";
 import { Navbar } from "./index";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useAuth } from "./../hooks/index";
 
 function App() {
-  const [users, setUsers] = useState([]);
-
-  // calling user api
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await getusers();
-      console.log("response", response);
-
-      if (response.success) {
-        setUsers(response.data.users);
-      }
-    };
-    fetchUsers();
-  }, []);
+  // use effect in useProviderAuth will be callede and set the user from token
+  const auth = useAuth();
 
   return (
     <div className="App">
@@ -26,7 +13,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/">
-            <Home users={users} />
+            <Home />
           </Route>
           <Route exact path="/login">
             <Login />

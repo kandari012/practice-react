@@ -15,7 +15,7 @@ export const getItemFromLocalStorage = (key) => {
   if (!key) {
     return console.error("cannot store i LocalStorage");
   }
-  localStorage.getItem(key);
+  return localStorage.getItem(key);
 };
 // remove token from local storage
 export const removeItemFromLocalStorage = (key) => {

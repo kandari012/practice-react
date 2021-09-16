@@ -1,7 +1,22 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState,useEffect } from "react";
+import { getusers } from './../api/index';
 
-function Home({ users }) {
+function Home() {
+  const [users, setUsers] = useState([]);
+
+  // calling user api
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await getusers();
+      console.log("response", response);
+
+      if (response.success) {
+        setUsers(response.data.users);
+      }
+    };
+    fetchUsers();
+  }, []);
   const arr = [1, 2, 3];
   return (
     <div>
