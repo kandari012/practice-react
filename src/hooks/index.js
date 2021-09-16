@@ -1,6 +1,11 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "./../providers/AuthProvider";
 import { login as UserLogin } from "../api";
+import {
+  LOCALSTORAGE_TOKEN_KEY,
+  removeItemFromLocalStorage,
+  setItemInLocalStorage,
+} from "../utils";
 
 //no need to call use context again in all fxn
 // to read data from AuthContext we will use usecontext hook
@@ -20,6 +25,10 @@ export const useProviderAuth = () => {
 
     if (response.success) {
       setUser(response.data.user);
+      setItemInLocalStorage(
+        LOCALSTORAGE_TOKEN_KEY,
+        response.data.token ? response.data.token : null
+      );
       return {
         success: true,
       };
@@ -32,6 +41,7 @@ export const useProviderAuth = () => {
   };
   const logout = () => {
     setUser(null);
+    removeItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
   };
 
   return {

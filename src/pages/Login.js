@@ -9,6 +9,7 @@ function Login() {
   const { addToast } = useToasts();
   const auth = useAuth();
   console.log(auth);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoggingIn(true);
