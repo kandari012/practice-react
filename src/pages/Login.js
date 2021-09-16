@@ -14,6 +14,7 @@ function Login() {
     e.preventDefault();
     setLoggingIn(true);
     if (!email || !password) {
+      setLoggingIn(false);
       return addToast("please enter both email and password", {
         appearance: "error",
       });

@@ -112,3 +112,31 @@ export async function login(email, password) {
     };
   }
 }
+
+export async function signIn(email, password, confirm_password, name) {
+  const url = API_URLS.signIn();
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: getFormBody({ email, password, confirm_password, name }),
+    });
+    const data = await response.json();
+    if (data.success) {
+      return {
+        data: data.data,
+        success: true,
+      };
+    }
+
+    throw new Error(data.message);
+  } catch (error) {
+    console.error("error");
+    return {
+      message: error.message,
+      success: false,
+    };
+  }
+}

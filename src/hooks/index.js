@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./../providers/AuthProvider";
-import { login as UserLogin } from "../api";
+import { login as UserLogin, signIn as UserSignIn } from "../api";
 import jwt from "jwt-decode";
 import {
   LOCALSTORAGE_TOKEN_KEY,
@@ -51,6 +51,26 @@ export const useProviderAuth = () => {
       };
     }
   };
+
+  const signIn = async (email, password, confirm_password, name) => {
+    const response = await UserSignIn(email, password, confirm_password, name);
+
+    if (response.success) {
+      // setUser(response.data.user);
+      // setItemInLocalStorage(
+      //   LOCALSTORAGE_TOKEN_KEY,
+      //   response.data.token ? response.data.token : null
+      // );
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+        message: response.message,
+      };
+    }
+  };
   const logout = () => {
     setUser(null);
     removeItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
@@ -61,5 +81,6 @@ export const useProviderAuth = () => {
     login,
     logout,
     loading,
+    signIn,
   };
 };
