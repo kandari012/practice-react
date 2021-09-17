@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useAuth } from "./../hooks/index";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -38,6 +38,10 @@ function Register() {
     }
     setLoggingIn(false);
   };
+
+  if (auth.user) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

@@ -24,7 +24,6 @@ function Login() {
     const response = await auth.login(email, password);
     console.log("response", response);
     if (response.success) {
-      Redirect("/Home");
       addToast("logged in successfully", {
         appearance: "success",
       });
@@ -36,6 +35,9 @@ function Login() {
     setLoggingIn(false);
   };
 
+  if (auth.user) {
+    return <Redirect to="/" />;
+  }
   return (
     <form onSubmit={handleSubmit}>
       <h4>Login</h4>

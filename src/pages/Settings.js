@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "./../hooks/index";
 import { useToasts } from "react-toast-notifications";
+import { Redirect } from "react-router-dom";
 
 function Settings() {
   const auth = useAuth();
@@ -49,6 +50,10 @@ function Settings() {
 
     setSavingForm(false);
   };
+
+  if (!auth.user) {
+    return <Redirect to="/login" />;
+  }
   return (
     <div style={{ textAlign: "center" }}>
       <h4>Profile</h4>
