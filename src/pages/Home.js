@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React, { useState,useEffect } from "react";
-import { getusers } from './../api/index';
+import React, { useState, useEffect } from "react";
+import { getusers } from "./../api/index";
 
 function Home() {
   const [users, setUsers] = useState([]);
@@ -17,7 +17,6 @@ function Home() {
     };
     fetchUsers();
   }, []);
-  const arr = [1, 2, 3];
   return (
     <div>
       <ul>

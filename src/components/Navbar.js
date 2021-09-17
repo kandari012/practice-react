@@ -9,11 +9,11 @@ function Navbar() {
       <ul>
         {auth.user && (
           <li>
-            <Link to="/">{auth.user.name}</Link>
+            <Link to="/setting">{auth.user.name}</Link>
           </li>
         )}
         {auth.user && (
-          <li>
+          <li onClick={auth.logout}>
             <button onClick={auth.logout}>Logout</button>
           </li>
         )}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router";
 import { useToasts } from "react-toast-notifications";
 import { useAuth } from "./../hooks/index";
 
@@ -23,6 +24,7 @@ function Login() {
     const response = await auth.login(email, password);
     console.log("response", response);
     if (response.success) {
+      Redirect("/Home");
       addToast("logged in successfully", {
         appearance: "success",
       });
