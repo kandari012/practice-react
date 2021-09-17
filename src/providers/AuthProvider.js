@@ -9,6 +9,7 @@ const initialState = {
   signIn: () => {},
   logout: () => {},
   loadung: true,
+  updateUser:()=>{}
 };
 
 //creating context

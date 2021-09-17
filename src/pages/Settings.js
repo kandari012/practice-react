@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "./../hooks/index";
+import { useToasts } from "react-toast-notifications";
 
 function Settings() {
   const auth = useAuth();
@@ -8,9 +9,45 @@ function Settings() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [savingForm, setSavingForm] = useState(false);
+  const { addToast } = useToasts();
 
-  const updateProfile = () => {
-    console.log("hello");
+  // once user updated will remove password values to empty string
+  const clearForm = () => {
+    setPassword("");
+    setconfirmPassword("");
+  };
+
+  const updateProfile = async () => {
+    setSavingForm(true);
+    if (!confirmPassword || !name || !password) {
+      setSavingForm(false);
+      return addToast("please fill all fields ", {
+        appearance: "error",
+      });
+    }
+
+    if (confirmPassword !== password) {
+      setSavingForm(false);
+      return addToast("password and confirm password not matching ", {
+        appearance: "error",
+      });
+    }
+    const response = await auth.updateUser(auth.user._id, password, name);
+
+    if (response.success) {
+      setEditMode(false);
+      clearForm();
+
+      addToast("user updated  successfully", {
+        appearance: "success",
+      });
+    } else {
+      addToast(response.message, {
+        appearance: "error",
+      });
+    }
+
+    setSavingForm(false);
   };
   return (
     <div style={{ textAlign: "center" }}>
@@ -69,7 +106,9 @@ function Settings() {
       {editMode ? (
         <>
           <div>
-            <button onClick={updateProfile}>Save Profile</button>
+            <button onClick={updateProfile} disabled={savingForm}>
+              {savingForm ? "Saving profile ...." : "Save Profile"}
+            </button>
           </div>
           <div>
             <button
