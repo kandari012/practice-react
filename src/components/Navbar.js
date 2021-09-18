@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./../hooks/index";
+import "./../styles/navbar.css";
 
 function Navbar() {
   const auth = useAuth();
   return (
-    <div>
+    <div className="Navbar">
       <ul>
         {auth.user && (
           <li>

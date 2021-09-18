@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router";
 import { useToasts } from "react-toast-notifications";
 import { useAuth } from "./../hooks/index";
+import "./../styles/form.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -40,7 +41,7 @@ function Login() {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <h4>Login</h4>
+      <h2>Login</h2>
       <div>
         <input
           type="email"

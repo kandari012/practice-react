@@ -1,4 +1,4 @@
-import { Home, Login, Register, Page404, Settings } from "./../pages";
+import { Home, Login, Register, Page404, Settings, Profile } from "./../pages";
 import { Navbar } from "./index";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useAuth } from "./../hooks/index";
@@ -25,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Register />
+          </Route>
+          <Route exact path="/profile/:id">
+            <Profile />
           </Route>
           <Route>
             <Page404 />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "./../hooks/index";
 import { useToasts } from "react-toast-notifications";
 import { Redirect } from "react-router-dom";
+import "./../styles/settings.css";
 
 function Settings() {
   const auth = useAuth();
@@ -55,15 +56,15 @@ function Settings() {
     return <Redirect to="/login" />;
   }
   return (
-    <div style={{ textAlign: "center" }}>
-      <h4>Profile</h4>
-      <div>
+    <div className="setting">
+      <h2>Profile</h2>
+      <div className="div1">
         <div>Email</div>
         <br />
         <div>{auth.user ? auth.user.email : ""}</div>
       </div>
       <br />
-      <div>
+      <div className="div1">
         <div>Name</div>
         <br />
         {editMode ? (
@@ -81,28 +82,24 @@ function Settings() {
       <br />
       {editMode && (
         <>
-          <div>
-            <div>Password</div>
-            <br />
-            <div>
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              ></input>
-            </div>
+          <div className="div1">
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              placeholder="Password"
+            ></input>
           </div>
+
           <br />
-          <div>
-            <div>Confirm password</div>
-            <br />
-            <div>
-              <input
-                type="password"
-                onChange={(e) => setconfirmPassword(e.target.value)}
-                value={confirmPassword}
-              ></input>
-            </div>
+
+          <div className="div1">
+            <input
+              type="password"
+              onChange={(e) => setconfirmPassword(e.target.value)}
+              value={confirmPassword}
+              placeholder="Confirm Password"
+            ></input>
           </div>
         </>
       )}
@@ -115,6 +112,7 @@ function Settings() {
               {savingForm ? "Saving profile ...." : "Save Profile"}
             </button>
           </div>
+          <br />
           <div>
             <button
               onClick={() => {

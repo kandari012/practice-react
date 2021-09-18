@@ -1,0 +1,9 @@
+.Navbar {
+  background-color: lightsteelblue;
+}
+.Navbar ul {
+  margin: 0;
+  list-style: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

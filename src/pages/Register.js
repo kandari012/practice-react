@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useAuth } from "./../hooks/index";
 import { useHistory, Redirect } from "react-router-dom";
+import "./../styles/form.css";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -45,7 +46,7 @@ function Register() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h4>Register</h4>
+      <h2>Register</h2>
       <div>
         <input
           type="email"

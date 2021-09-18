@@ -23,6 +23,29 @@ export async function getusers() {
   }
 }
 
+export async function getSingleUser(user_id) {
+  const url = API_URLS.getUser(user_id);
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("op of user api", data);
+    if (data.success) {
+      return {
+        data: data.data,
+        success: true,
+      };
+    }
+
+    throw new Error(data.message);
+  } catch (error) {
+    console.error("error");
+    return {
+      message: error.message,
+      success: false,
+    };
+  }
+}
+
 export async function login(email, password) {
   const url = API_URLS.login();
   try {
