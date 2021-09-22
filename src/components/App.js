@@ -2,11 +2,21 @@ import { Home, Login, Register, Page404, Settings, Profile } from "./../pages";
 import { Navbar } from "./index";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useAuth } from "./../hooks/index";
+import { getUserByName, login_axios } from "../api";
+import { useEffect } from "react";
 
 function App() {
   // use effect in useProviderAuth will be callede and set the user from token
   const auth = useAuth();
   console.log(auth);
+
+  // calling user api
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     const response = await getUserByName("rahul");
+  //   };
+  //   fetchUsers();
+  // }, []);
 
   return (
     <div className="App">

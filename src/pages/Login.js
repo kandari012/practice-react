@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router";
 import { useToasts } from "react-toast-notifications";
+import { login_axios } from "../api";
 import { useAuth } from "./../hooks/index";
 import "./../styles/form.css";
 
@@ -23,6 +24,7 @@ function Login() {
     }
 
     const response = await auth.login(email, password);
+
     console.log("response", response);
     if (response.success) {
       addToast("logged in successfully", {

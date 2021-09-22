@@ -1,3 +1,4 @@
+import axios from "axios";
 import { API_URLS, LOCALSTORAGE_TOKEN_KEY } from "../utils";
 import { getFormBody } from "./../utils";
 
@@ -46,6 +47,29 @@ export async function getSingleUser(user_id) {
   }
 }
 
+export async function getUserByName(text) {
+  const url = API_URLS.getUserByName(text);
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log("op of user name search api", data);
+    if (data.success) {
+      return {
+        data: data.data,
+        success: true,
+      };
+    }
+
+    throw new Error(data.message);
+  } catch (error) {
+    console.error("error");
+    return {
+      message: error.message,
+      success: false,
+    };
+  }
+}
+
 export async function login(email, password) {
   const url = API_URLS.login();
   try {
@@ -72,6 +96,33 @@ export async function login(email, password) {
       success: false,
     };
   }
+}
+
+export async function login_axios(email, password) {
+  const url = API_URLS.login();
+
+  var body = {
+    email: "rahul@gmail.com",
+    password: "1111",
+  };
+  axios({
+    method: "post",
+    url: url,
+    data: {
+      email: "rahul@gmail.com",
+      password: "1111",
+    },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  })
+    .then(function (response) {
+      console.log("response from axios", response);
+    })
+    .catch(function (error) {
+      console.log(error.response.data);
+      console.log(error);
+    });
 }
 
 export async function signIn(email, password, confirm_password, name) {
