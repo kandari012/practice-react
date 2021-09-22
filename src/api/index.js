@@ -1,6 +1,12 @@
 import axios from "axios";
-import { API_URLS, LOCALSTORAGE_TOKEN_KEY } from "../utils";
+import {
+  API_URLS,
+  getItemFromLocalStorage,
+  LOCALSTORAGE_TOKEN_KEY,
+} from "../utils";
 import { getFormBody } from "./../utils";
+
+const token = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
 
 export async function getusers() {
   const url = API_URLS.getAllUsers();
@@ -48,6 +54,7 @@ export async function getSingleUser(user_id) {
 }
 
 export async function getUserByName(text) {
+  console.log("token is ", token);
   const url = API_URLS.getUserByName(text);
   try {
     const response = await fetch(url);
@@ -161,6 +168,7 @@ export async function update(user_id, password, name) {
       method: "PUT",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${token}`,
       },
       body: getFormBody({ password, name }),
     });
