@@ -2,21 +2,27 @@ import { Home, Login, Register, Page404, Settings, Profile } from "./../pages";
 import { Navbar } from "./index";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useAuth } from "./../hooks/index";
-import { getUserByName, login_axios } from "../api";
 import { useEffect } from "react";
+import { useToasts } from "react-toast-notifications";
 
 function App() {
   // use effect in useProviderAuth will be callede and set the user from token
   const auth = useAuth();
-  console.log(auth);
+  const { addToast } = useToasts();
 
-  // calling user api
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     const response = await getUserByName("rahul");
-  //   };
-  //   fetchUsers();
-  // }, []);
+  // check session is expired or not  on each click
+  document.addEventListener("click", function () {
+    var now = new Date().getTime();
+    var setupTime = localStorage.getItem("setupTime");
+
+    if (setupTime && now - setupTime > 7 * 24 * 60 * 60 * 1000) {
+      auth.logout();
+      addToast("your session is logged out", {
+        appearance: "error",
+      });
+      console.log("session ended");
+    }
+  });
 
   return (
     <div className="App">

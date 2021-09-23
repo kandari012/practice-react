@@ -20,8 +20,8 @@ export const getItemFromLocalStorage = (key) => {
 
   var now = new Date().getTime();
   var setupTime = localStorage.getItem("setupTime");
-
-  if (now - setupTime > 7 * 60 * 60 * 1000) {
+//session will expire after 7 days
+  if (now - setupTime > 7*24*60 * 60 * 1000) {
     localStorage.removeItem(key);
     localStorage.removeItem("setupTime");
   }

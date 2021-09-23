@@ -3,7 +3,8 @@ import { useParams } from "react-router";
 import { getSingleUser } from "../api";
 import "./../styles/profile.css";
 import { useToasts } from "react-toast-notifications";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
+import { useAuth } from "./../hooks/index";
 
 function Profile() {
   const [user, setUser] = useState({});
@@ -11,6 +12,7 @@ function Profile() {
   const { id } = useParams();
   const { addToast } = useToasts();
   const history = useHistory();
+  const auth = useAuth();
 
   useEffect(() => {
     const getUser = async () => {
@@ -26,6 +28,10 @@ function Profile() {
     };
     getUser();
   }, [id]);
+
+  if (!auth.user) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div className="profile">
