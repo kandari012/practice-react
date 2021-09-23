@@ -6,8 +6,6 @@ import {
 } from "../utils";
 import { getFormBody } from "./../utils";
 
-const token = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
-
 export async function getusers() {
   const url = API_URLS.getAllUsers();
   try {
@@ -35,7 +33,6 @@ export async function getSingleUser(user_id) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("op of user api", data);
     if (data.success) {
       return {
         data: data.data,
@@ -54,12 +51,10 @@ export async function getSingleUser(user_id) {
 }
 
 export async function getUserByName(text) {
-  console.log("token is ", token);
   const url = API_URLS.getUserByName(text);
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("op of user name search api", data);
     if (data.success) {
       return {
         data: data.data,
@@ -128,7 +123,6 @@ export async function login_axios(email, password) {
     })
     .catch(function (error) {
       console.log(error.response.data);
-      console.log(error);
     });
 }
 
@@ -163,6 +157,8 @@ export async function signIn(email, password, confirm_password, name) {
 // update user
 export async function update(user_id, password, name) {
   const url = API_URLS.update(user_id);
+  let token = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
+  console.log("url==", url, "token===", `Bearer ${token}`);
   try {
     const response = await fetch(url, {
       method: "PUT",

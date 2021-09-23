@@ -25,7 +25,6 @@ function Register() {
     }
 
     const response = await auth.signIn(email, password, confirm_password, name);
-    console.log("response", response);
     if (response.success) {
       //on successful register will take to login form
       history.push("/login");

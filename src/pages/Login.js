@@ -25,7 +25,6 @@ function Login() {
 
     const response = await auth.login(email, password);
 
-    console.log("response", response);
     if (response.success) {
       addToast("logged in successfully", {
         appearance: "success",

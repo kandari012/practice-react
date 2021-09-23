@@ -25,11 +25,12 @@ export const useProviderAuth = () => {
   // on app first load or reload will check token in store and update user with that
   useEffect(() => {
     const UserToken = getItemFromLocalStorage(LOCALSTORAGE_TOKEN_KEY);
-    console.log("adding user in user from token");
+
     if (UserToken) {
       const user = jwt(UserToken);
       setUser(user);
     }
+    console.log("adding user in user from token", user);
   }, []);
 
   const login = async (email, password) => {

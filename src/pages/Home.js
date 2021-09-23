@@ -10,7 +10,6 @@ function Home() {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await getusers();
-      console.log("response", response);
 
       if (response.success) {
         setUsers(response.data.users);

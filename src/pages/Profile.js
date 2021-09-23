@@ -14,9 +14,7 @@ function Profile() {
 
   useEffect(() => {
     const getUser = async () => {
-      console.log("user id for api call", id);
       const response = await getSingleUser(id);
-      console.log("res from user api", response);
       if (response.success) {
         setUser(response.data.user);
       } else {
